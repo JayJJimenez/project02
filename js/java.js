@@ -1,15 +1,11 @@
+// step 1 : create function getQuote - retrieve fetch api 
+
 const getQuote = () => {
     return fetch('https://api.kanye.rest')
     .then(data=>{return data.json()})
 }
 
-document.addEventListener('DOMContentLoaded', getQuote)
-
-getQuote().then(data => {
-    const quoteDiv = makeQuoteDiv(data.quote)
-    appendQuote(quoteDiv)
-})
-
+// step 2: create the DIV that will replace elements within HTML with the fetched information
 const makeQuoteDiv = (quote => {
     console.log(quote)
     const div = document.createElement('div');
@@ -23,6 +19,8 @@ const makeQuoteDiv = (quote => {
     return div
 })
 
+
+// step 3: append the DIV to the HTML
 const appendQuote = (quoteDiv) => {
     const quoteContainer = document.getElementById("quotebox")
     quoteContainer.innerHTML = ""
@@ -30,6 +28,19 @@ const appendQuote = (quoteDiv) => {
 }
 
 
+// step 4: appending the information from the fetched data
+getQuote().then(data => {
+    const quoteDiv = makeQuoteDiv(data.quote)
+    appendQuote(quoteDiv)
+})
+
+
+
+// step 5: add an event listener to load content once page starts
+document.addEventListener('DOMContentLoaded', getQuote)
+
+
+// step 6: create event listener that initializes the QuoteDIV function when the btn is clicked
 const btn = document.getElementById("btn")
 
 btn.addEventListener("click", () => {
